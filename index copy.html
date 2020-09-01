@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, paper, scissors</title>
+    <link href="StyleSheet.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <h1>You 😃 vs computer 🤖</h1>
+        <h1>Who will be the Champion?</h1>
+        <h2>Pick your hand!</h2>
+        <button class="button" id="rock">✊🏻</button>
+        <button class="button" id="paper">✋🏻</button>
+        <button class="button" id="scissors">✌🏻</button>
+    </div> 
+    <div>
+        <h2>Result:</h2>
+    </div>
+</body>
+<script>
+
+    // This allows the computer to pick 'rock', 'paper', or 'scissors'
+    function computerPlay () {
+     switch(Math.floor(Math.random()*3)) {
+      case 0:
+        return 'rock';
+        break;
+      case 1:
+        return 'scissors';
+        break;
+      case 2:
+        return 'paper';
+  	};
+    }
+
+    // This compares the two hands and tells the player who won the round
+    function playRound (playerSelection, computerPlay) {
+        if (playerSelection === computerPlay) {
+            return 'It\'s a tie!';
+        } else if (playerSelection === 'rock' & computerPlay === 'paper') {
+            return 'You lose! Paper beats Rock!';
+        } else if (playerSelection === 'rock' & computerPlay === 'scissors') {
+            return 'You win! Rock beats Scissors!';
+        } else if (playerSelection === 'paper' & computerPlay === 'scissors') {
+            return 'You lose! Scissors beats Paper!';
+        } else if (playerSelection === 'paper' & computerPlay === 'rock') {
+            return 'You win! Paper beats Rock!';
+        } else if (playerSelection === 'scissors' & computerPlay === 'rock') {
+            return 'You lose! Rock beats Scissors!';
+        } else if (playerSelection === 'scissors' & computerPlay === 'paper') {
+            return 'You win! Scissors beats Paper!';
+        }
+    }
+    
+    // These variables at the global level are used to store the score of
+    // the player and the computer
+    let playerScore = 0;
+    let computerScore = 0;
+
+    //These variables are event listeners. When you press the corresponding button,
+    //the function playRound is run with provided the corresponding playerSelection and
+    //computerPlay is called to have the computer select its hand
+    const rock = document.querySelector('#rock');
+    rock.addEventListener('click', () => {
+        console.log(playRound('rock', computerPlay()));
+        });
+    
+    const paper = document.querySelector('#paper');
+    paper.addEventListener('click', () => {
+        console.log(playRound('paper', computerPlay()));
+        });
+
+    const scissors = document.querySelector('#scissors');
+    scissors.addEventListener('click', () => {
+        let playerSelection = 'scissors';
+        console.log(playRound('rock', computerPlay()));
+        });
+    </script>
+</html>
