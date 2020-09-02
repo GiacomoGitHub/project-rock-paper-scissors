@@ -3,14 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock, paper, scissors</title>
+    <link href="StyleSheet.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <div id="UI">
+        <h1>ROCK PAPER SCISSORS</h1>
+        <h2>You 😃 vs 🤖 your computer. Who will reach 5 points first?</h2>
+        <h2>Pick your hand!</h2>
+        <button class="button" id="rock">✊🏻</button>
+        <button class="button" id="paper">✋🏻</button>
+        <button class="button" id="scissors">✌🏻</button>
+    </div> 
+    <div id="score">
+    </div>
 </body>
 <script>
 
-    // This allows the computer to pick 'rock', 'paper', or 'scissors'
+    //This function allows the computer to pick 'rock', 'paper', or 'scissors'
     function computerPlay () {
      switch(Math.floor(Math.random()*3)) {
       case 0:
@@ -24,69 +35,99 @@
   	};
     }
 
-    // This puts playerSelection in lower case, compares the two hands, 
-    // and tells the player who won the round
-    function playRound (playerSelection, computerSelection) {
-        playerSelection = playerSelection.toLowerCase();
-        if (playerSelection === computerSelection) {
-            return 'It\'s a tie!';
-        } else if (playerSelection === 'rock' & computerSelection === 'paper') {
-            return 'You lose! Paper beats Rock!';
-        } else if (playerSelection === 'rock' & computerSelection === 'scissors') {
-            return 'You win! Rock beats Scissors!';
-        } else if (playerSelection === 'paper' & computerSelection === 'scissors') {
-            return 'You lose! Scissors beats Paper!';
-        } else if (playerSelection === 'paper' & computerSelection === 'rock') {
-            return 'You win! Paper beats Rock!';
-        } else if (playerSelection === 'scissors' & computerSelection === 'rock') {
-            return 'You lose! Rock beats Scissors!';
-        } else if (playerSelection === 'scissors' & computerSelection === 'paper') {
-            return 'You win! Scissors beats Paper!';
-        } else {
-            return "Pick either paper, rock, or scissors!";
+    //This function compares the two hands, increments the score, alerts the player who won the round, calls the function
+    //alertWinner to check if there is a winner of the match, then calls the function updateScore() to
+    //update the score stored in the corresponding global variables
+    function playRound (playerSelection, computerPlay) {
+        if (playerSelection === computerPlay) {
+            alert('🤷🏻It\'s a tie! Your computer picked the same hand!');
+            alertWinner();
+            updateScore();
+        } else if (playerSelection === 'rock' & computerPlay === 'paper') {
+            computerScore = ++computerScore;
+            alert('😩You lose! Your computer picked ✋🏻!');
+            alertWinner();
+            updateScore();
+        } else if (playerSelection === 'rock' & computerPlay === 'scissors') {
+            playerScore = ++playerScore;
+            alert('🥳You win! Your computer picked ✌🏻!');
+            alertWinner();
+            updateScore();
+        } else if (playerSelection === 'paper' & computerPlay === 'scissors') {
+            computerScore = ++computerScore;
+            alert('😩You lose! Your computer picked ✌🏻!');
+            alertWinner();
+            updateScore();
+        } else if (playerSelection === 'paper' & computerPlay === 'rock') {
+            playerScore = ++playerScore;
+            alert('🥳You win! Your computer picked ✊🏻!');
+            alertWinner();
+            updateScore();
+        } else if (playerSelection === 'scissors' & computerPlay === 'rock') {
+            computerScore = ++computerScore;
+            alert('😩You lose! Your computer picked ✊🏻!');
+            alertWinner();
+            updateScore();
+        } else if (playerSelection === 'scissors' & computerPlay === 'paper') {
+            playerScore = ++playerScore;
+            alert('🥳You win! Your computer picked ✋🏻!');
+            alertWinner();
+            updateScore();
         }
     }
-    
-    // These variables at the global level are used to store the score of
-    // the player and the computer
+
+    //These variables at the global level are used to store the score of
+    //the player and the computer
     let playerScore = 0;
     let computerScore = 0;
- 
-    // This function is using a loop. The loop runs 5 times and first shows a prompt for the player's input(playerSelection), then
-    //runs the computerSelection, then console.logs playRound, and then uses if/else statements to compare the hands
-    // and update the score of the player and computer. Once the loop ends, it runs another series of if/else statements
-    // that check who has the highest score, alert the winner and the points, and finally reset the score
-    function game () {
-        for (let i = 0; i < 5; i++) {
-            let playerSelection = window.prompt();
-            let computerSelection = computerPlay ();
-            console.log(playRound(playerSelection, computerSelection));
-            if (playerSelection === 'rock' & computerSelection === 'paper') {
-                computerScore = ++computerScore;
-            } else if (playerSelection === 'rock' & computerSelection === 'scissors') {
-                playerScore = ++playerScore;
-            } else if (playerSelection === 'paper' & computerSelection === 'scissors') {
-                computerScore = ++computerScore;
-            } else if (playerSelection === 'paper' & computerSelection === 'rock') {
-                playerScore = ++playerScore;
-            } else if (playerSelection === 'scissors' & computerSelection === 'rock') {
-                computerScore = ++computerScore;
-            } else if (playerSelection === 'scissors' & computerSelection === 'paper') {
-                playerScore = ++playerScore;
-                }
-        } if (computerScore > playerScore) {
-            alert('Computer wins! It has ' + computerScore + ' points and you have ' + playerScore + ' points');
-            playerScore = 0;
-            computerScore = 0;
-        } else if (computerScore < playerScore) {
-            alert('You win! You have ' + playerScore + ' points and the computer has ' + computerScore + ' points');
-            playerScore = 0;
-            computerScore = 0;
-        } else {
-            alert('It\'s a draw! You have ' + playerScore + ' points and the computer has ' + computerScore + ' points');
-            playerScore = 0;
-            computerScore = 0;
+
+    //This variable targets the div with id='score'
+    let score = document.querySelector('#score');
+
+    //This is the function that we call in playRound(), which updates the text of the div at each round
+    //with the score of player and computer
+    function updateScore () {
+        score.textContent = 'You: ' + playerScore + ' ' + 'Computer: ' + computerScore;
+    }
+
+    //This function is called at each round in the function playRound() and checks if one of the players
+    //has reached 5 points. If so, it alerts the winner and resets the score to zero
+    //by calling the function resetScore()
+    function alertWinner () {
+        if (playerScore === 5) {
+            alert('You are the winner of this match! Woohoo! 🤩🏆');
+            resetScore();
+        } else if (computerScore === 5) {
+            alert('The computer wins this match! 😭');
+            alert(' Try again and show it who\'s boss! 😎');
+            resetScore();
         }
     }
+
+    //This function is called in the function alertWinner() and it resets the score
+    function resetScore() {
+        playerScore = 0;
+        computerScore = 0;
+    }
+
+    //These variables are event listeners. 
+    //When you press the corresponding button in the UI,
+    //the function playRound is called. It is here provided with the arguments of the
+    //pressed button (either rock, paper, or scissors) and computerPlay (which is a function called here)
+    const rock = document.querySelector('#rock');
+    rock.addEventListener('click', () => {
+        playRound('rock', computerPlay()); /*As you see, the value 'rock' is passed as an argument of the function playRound*/
+        });
+    
+    const paper = document.querySelector('#paper');
+    paper.addEventListener('click', () => {
+        playRound('paper', computerPlay()); /*As you see, the value 'paper' is passed as an argument of the function playRound*/
+        });
+
+    const scissors = document.querySelector('#scissors');
+    scissors.addEventListener('click', () => {
+        playRound('scissors', computerPlay()); /*As you see, the value 'scissors' is passed as an argument of the function playRound*/
+        });
+        
     </script>
 </html>
