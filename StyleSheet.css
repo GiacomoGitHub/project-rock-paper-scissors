@@ -16,15 +16,14 @@ h1 {
 }
 
 h2 {
+    margin-top: 5%;
     font-size: 35px;
+    margin-right: 20%;
+    margin-left: 20%;
 }
 
 h3 {
     padding-top: 7%;
-}
-
-.score {
-    display: inline;
 }
 
 button {
@@ -34,6 +33,7 @@ button {
     font-size: 40px;
     border-radius: 45%;
     padding: 2%;
+    margin-bottom: 3%;
     font-family: 'Noto Sans JP', sans-serif;
     text-decoration: none;
     cursor: pointer;
