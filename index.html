@@ -8,9 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="UI">
+    <div>
         <h1>ROCK PAPER SCISSORS</h1>
-        <h2>You 😃 vs 🤖 your computer. Who will reach 5 points first?</h2>
+        <h2>You 😃 vs 🤖 the computer. Who will reach 5 points first?</h2>
         <h2>Pick your hand!</h2>
         <button class="button" id="rock">✊🏻</button>
         <button class="button" id="paper">✋🏻</button>
@@ -40,37 +40,37 @@
     //update the score stored in the corresponding global variables
     function playRound (playerSelection, computerPlay) {
         if (playerSelection === computerPlay) {
-            alert('🤷🏻It\'s a tie! Your computer picked the same hand!');
+            alert('🤷🏻It\'s a tie! The computer picked the same hand!');
             alertWinner();
             updateScore();
         } else if (playerSelection === 'rock' & computerPlay === 'paper') {
             computerScore = ++computerScore;
-            alert('😩You lose! Your computer picked ✋🏻!');
+            alert('😩You lose! The computer picked ✋🏻!');
             alertWinner();
             updateScore();
         } else if (playerSelection === 'rock' & computerPlay === 'scissors') {
             playerScore = ++playerScore;
-            alert('🥳You win! Your computer picked ✌🏻!');
+            alert('🥳You win! The computer picked ✌🏻!');
             alertWinner();
             updateScore();
         } else if (playerSelection === 'paper' & computerPlay === 'scissors') {
             computerScore = ++computerScore;
-            alert('😩You lose! Your computer picked ✌🏻!');
+            alert('😩You lose! The computer picked ✌🏻!');
             alertWinner();
             updateScore();
         } else if (playerSelection === 'paper' & computerPlay === 'rock') {
             playerScore = ++playerScore;
-            alert('🥳You win! Your computer picked ✊🏻!');
+            alert('🥳You win! The computer picked ✊🏻!');
             alertWinner();
             updateScore();
         } else if (playerSelection === 'scissors' & computerPlay === 'rock') {
             computerScore = ++computerScore;
-            alert('😩You lose! Your computer picked ✊🏻!');
+            alert('😩You lose! The computer picked ✊🏻!');
             alertWinner();
             updateScore();
         } else if (playerSelection === 'scissors' & computerPlay === 'paper') {
             playerScore = ++playerScore;
-            alert('🥳You win! Your computer picked ✋🏻!');
+            alert('🥳You win! The computer picked ✋🏻!');
             alertWinner();
             updateScore();
         }
@@ -98,8 +98,7 @@
             alert('You are the winner of this match! Woohoo! 🤩🏆');
             resetScore();
         } else if (computerScore === 5) {
-            alert('The computer wins this match! 😭');
-            alert(' Try again and show it who\'s boss! 😎');
+            alert('😭 The computer wins this match! Try again!');
             resetScore();
         }
     }
